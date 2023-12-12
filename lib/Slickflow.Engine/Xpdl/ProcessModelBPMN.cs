@@ -42,6 +42,27 @@ namespace Slickflow.Engine.Xpdl
     /// </summary>
     public class ProcessModelBPMN : IProcessModel
     {
+        /// <summary>
+        /// 流程实体
+        /// </summary>
+        public ProcessEntity ProcessEntity { get; set; }
+
+        /// <summary>
+        /// 子流程ID
+        /// </summary>
+        public string SubProcessGUID { get; set; }
+
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="entity">流程实体</param>
+        public ProcessModelBPMN(ProcessEntity entity)
+        {
+            this.ProcessEntity = entity;
+        }
+
+
         #region 属性与构造函数
         /// <summary>
         /// 流程实体
@@ -61,15 +82,7 @@ namespace Slickflow.Engine.Xpdl
                 return XPDLMemoryCachedHelper.GetXpdlCache(processGUID, version);
             }
         }
-        /// <summary>
-        /// 流程实体
-        /// </summary>
-        public ProcessEntity ProcessEntity { get; set; }
 
-        /// <summary>
-        /// 子流程ID
-        /// </summary>
-        public string SubProcessGUID { get; set; }
         
         /// <summary>
         /// 从XML转换流程实体
@@ -77,6 +90,7 @@ namespace Slickflow.Engine.Xpdl
         /// <returns></returns>
         private Process ConvertProcessModelFromXML()
         {
+
             var xmlDoc = new XmlDocument();
 
             // 将xml的内容加载在xmldoc中
@@ -102,14 +116,6 @@ namespace Slickflow.Engine.Xpdl
             return process;
         }
 
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="entity">流程实体</param>
-        public ProcessModelBPMN(ProcessEntity entity)
-        {
-            ProcessEntity = entity;
-        }
         #endregion
 
         #region Get Activity from XML
@@ -401,8 +407,12 @@ namespace Slickflow.Engine.Xpdl
         /// <returns>结束节点</returns>
         public Activity GetEndActivity()
         {
-            var activity = ProcessModelHelper.GetEndActivity(this.Process);
-            return activity;
+            var endNode = ProcessModelHelper.GetEndActivity(this.Process);
+            if (endNode == null)
+            {
+                throw new ApplicationException(LocalizeHelper.GetEngineMessage("processmodel.getendactivity.error"));
+            }
+            return endNode;
         }
 
         /// <summary>

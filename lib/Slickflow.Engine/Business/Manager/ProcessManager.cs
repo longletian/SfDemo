@@ -831,8 +831,12 @@ namespace Slickflow.Engine.Business.Manager
         /// <param name="processModel">流程模型</param>
         /// <param name="entity">流程实体</param>
         /// <param name="xmlConent">XML内容</param>
-        private void SetProcessStartEndType(IProcessModel processModel, ProcessEntity entity, string xmlConent)
+        private ProcessEntity SetProcessStartEndType(IProcessModel processModel, ProcessEntity entity, string xmlConent)
         {
+
+            // 解决xml问题
+            processModel.ProcessEntity.XmlContent = xmlConent;
+       
             //StartNode
             var startNode = processModel.GetStartActivity();
             if (startNode != null)
@@ -870,6 +874,7 @@ namespace Slickflow.Engine.Business.Manager
                     }
                 }
             }
+            return entity;
         }
 
         /// <summary>

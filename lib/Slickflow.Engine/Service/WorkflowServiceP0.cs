@@ -303,6 +303,8 @@ namespace Slickflow.Engine.Service
             {
                 ProcessGUID = entity.ProcessGUID,
                 Version = entity.Version,
+                // 解决数据processcode不能为空的问题
+                ProcessCode= entity.ProcessCode,
                 ProcessName = entity.ProcessName,
                 XmlContent = xmlContent
             };
