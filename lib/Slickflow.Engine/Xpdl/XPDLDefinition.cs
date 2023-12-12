@@ -51,8 +51,18 @@ namespace Slickflow.Engine.Xpdl
         internal static readonly string BPMN2_ElementName_ManualTask = "bpmn2:manualTask";
         internal static readonly string BPMN2_ElementName_ServiceTask = "bpmn2:serviceTask";
         internal static readonly string BPMN2_ElementName_ScriptTask = "bpmn2:scriptTask";
+
+        /// <summary>
+        /// 排他网关（异或网关）（一行定义网关的xml,而条件表达式定义在出口顺序流）
+        /// </summary>
         internal static readonly string BPMN2_ElementName_ExclusiveGateway = "bpmn2:exclusiveGateway";
+        /// <summary>
+        /// 包容网关（排他网关和并行网关的组合）
+        /// </summary>
         internal static readonly string BPMN2_ElementName_InclusiveGateway = "bpmn2:inclusiveGateway";
+        /// <summary>
+        /// 并行网关（分支、合并）（为每条顺序流创建一个并行执行，所有到达并行网关的并行执行，都在网关等待）
+        /// </summary>
         internal static readonly string BPMN2_ElementName_ParallelGateway = "bpmn2:parallelGateway";
         internal static readonly string BPMN2_ElementName_ConditionExpression = "bpmn2:conditionExpression";
         internal static readonly string BPMN2_ElementName_GroupBehaviours = "sf:groupBehaviours";

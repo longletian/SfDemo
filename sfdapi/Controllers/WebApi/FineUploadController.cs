@@ -79,6 +79,7 @@ namespace Slickflow.Designer.Controllers.WebApi
                         {
                             using (var streamReader = new StreamReader(section.Body))
                             {
+                                // 获取xml文件内容
                                 var xmlContent = await streamReader.ReadToEndAsync();
                                 var isOk = CreateNewProcess(xmlContent, out message);
                                 return Ok(new { success = isOk, Message =  message});
@@ -138,6 +139,8 @@ namespace Slickflow.Designer.Controllers.WebApi
                         };
 
                         var wfService = new WorkflowService();
+
+                        // 导入流程
                         wfService.ImportProcess(processEntity);
                         isUploaded = true;
                         message = LocalizeHelper.GetDesignerMessage("fineuploadcontroller.importprocess.success");
