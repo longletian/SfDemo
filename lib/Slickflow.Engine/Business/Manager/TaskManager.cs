@@ -850,11 +850,11 @@ namespace Slickflow.Engine.Business.Manager
             TaskViewEntity taskView = null;
             if (runner.TaskID != null)
             {
-                taskView = GetTaskView(conn, runner.TaskID.Value, trans);
+                taskView = GetTaskView(runner.TaskID.Value);
             }
             else
             {
-                taskView = GetTaskOfMine(conn, runner.AppInstanceID, runner.ProcessGUID, runner.UserID, trans);
+                taskView = GetTaskOfMine(runner.AppInstanceID, runner.ProcessGUID, runner.UserID);
             }
             return taskView;
         }
